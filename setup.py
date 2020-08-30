@@ -22,12 +22,19 @@
 # THE SOFTWARE.
 
 import os
-import imp
 from distutils.core import setup
 
 PKG_DIR = 'pathtools'
-version = imp.load_source('version',
-                          os.path.join(PKG_DIR, 'version.py'))
+
+if sys.version_info >= (3, 5):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        'version', os.path.join(PKG_DIR, 'version.py'))
+    version = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(version)
+else:
+    import imp
+    version = imp.load_source('version', os.path.join(PKG_DIR, 'version.py'))
 
 def read_file(filename):
     """
