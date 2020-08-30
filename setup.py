@@ -22,6 +22,7 @@
 # THE SOFTWARE.
 
 import os
+import sys
 from distutils.core import setup
 
 PKG_DIR = 'pathtools'
